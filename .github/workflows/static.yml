@@ -20,40 +20,34 @@ concurrency:
 
 # Задачи воркфлоу
 jobs:
-  # Задача деплоя
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Проверить репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Установить Doxygen и Graphviz
       - name: Install Doxygen and Graphviz
         run: |
           sudo apt update
           sudo apt install -y doxygen graphviz
 
-      # Проверить версию Doxygen (опционально)
       - name: Check Doxygen version
         run: doxygen --version
 
-      # Генерация документации с использованием Doxygen
       - name: Generate Doxygen documentation
         run: doxygen
 
-      # Настроить GitHub Pages
+      - name: List generated files for debug
+        run: ls -R docs/html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Загрузить артефакты
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Путь к сгенерированной документации
-          path: ./docs/html/
+          path: docs/html
 
-      # Деплой на GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
