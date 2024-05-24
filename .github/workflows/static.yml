@@ -1,53 +1,55 @@
-# Название воркфлоу
-name: Deploy Doxygen Documentation to GitHub Pages
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
 
-# События, запускающие воркфлоу
 on:
+  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Установить разрешения для GITHUB_TOKEN, чтобы разрешить деплой на GitHub Pages
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Позволить только одному запуску деплоя одновременно
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
-# Задачи воркфлоу
 jobs:
+  # Single deploy job since we're just deploying
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install Doxygen and Graphviz
-        run: |
-          sudo apt update
-          sudo apt install -y doxygen graphviz
-
-      - name: Check Doxygen version
-        run: doxygen --version
-
-      - name: Generate Doxygen documentation
-        run: doxygen
-
-      - name: List generated files for debug
-        run: ls -R docs/html
-
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v4
 
+      # Install Doxygen
+      - name: Install Doxygen
+        run: sudo apt install doxygen && doxygen --version
+
+      - name: Install Graphviz
+        run: sudo apt install graphviz
+        
+      # Create documentation   
+      - name: Create documentation     
+        run: doxygen
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/html
-
+          # Upload entire repository
+          path: './html/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
