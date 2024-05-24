@@ -12,14 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Install Doxygen and Graphviz
         run: |
           sudo apt update
           sudo apt install -y doxygen graphviz
+
       - name: Check Doxygen version
         run: doxygen --version
+
       - name: Generate Documentation
         run: doxygen
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
