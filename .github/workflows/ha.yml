@@ -1,0 +1,32 @@
+# Название воркфлоу
+name: Мой воркфлоу для Doxygen
+
+# Событие, запускающее воркфлоу
+on:
+  push:
+    branches: [ main ]
+
+# Задачи воркфлоу
+jobs:
+  # Задача установки Doxygen
+  установка_Doxygen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo apt install doxygen
+      - run: doxygen --version
+
+  # Задача установки Graphviz
+  установка_Graphviz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo apt install graphviz
+
+  # Задача генерации документации
+  генерация_документации:
+    runs-on: ubuntu-latest
+    needs: [установка_Doxygen, установка_Graphviz]
+    steps:
+      - uses: actions/checkout@v3
+      - run: doxygen
