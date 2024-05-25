@@ -1,65 +1,61 @@
 from demo import Calculator
 
 
-class Addition:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+class Summation:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-    def calculate(self):
-        return self.a + self.b
+    def compute(self):
+        return self.x + self.y
 
-class Subtraction:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+class Difference:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-    def calculate(self):
-        return self.a - self.b
+    def compute(self):
+        return self.x - self.y
 
-class Multiplication:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+class Product:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-    def calculate(self):
-        return self.a * self.b
+    def compute(self):
+        return self.x * self.y
 
-class Division:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+class Quotient:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-    def calculate(self):
-        if self.b == 0:
+    def compute(self):
+        if self.y == 0:
             raise ValueError("Cannot divide by zero")
-        return self.a / self.b
+        return self.x / self.y
 
 class Calculator:
     def __init__(self):
         pass
 
-    def perform_operation(self, operation, a, b):
-        if operation == 'addition':
-            return Addition(a, b).calculate()
-        elif operation == 'subtraction':
-            return Subtraction(a, b).calculate()
-        elif operation == 'multiplication':
-            return Multiplication(a, b).calculate()
-        elif operation == 'division':
-            return Division(a, b).calculate()
+    def execute_operation(self, operation, x, y):
+        if operation == 'summation':
+            return Summation(x, y).compute()
+        elif operation == 'difference':
+            return Difference(x, y).compute()
+        elif operation == 'product':
+            return Product(x, y).compute()
+        elif operation == 'quotient':
+            return Quotient(x, y).compute()
         else:
             raise ValueError("Invalid operation")
 
-    if __name__ == "__main__":
-        calc = Calculator()
-    a = 50
-    b = 2
-    print("Addition:", calc.perform_operation('addition', a,
-                                              b))
-    print("Subtraction:", calc.perform_operation('subtraction',
-                                                 a, b))
-    print("Multiplication:",
-          calc.perform_operation('multiplication', a, b))
-    print("Division:", calc.perform_operation('division', a,b))
-    #ggggg
+if __name__ == "__main__":
+    calc = Calculator()
+    x = 50
+    y = 2
+    print("Summation:", calc.execute_operation('summation', x, y))
+    print("Difference:", calc.execute_operation('difference', x, y))
+    print("Product:", calc.execute_operation('product', x, y))
+    print("Quotient:", calc.execute_operation('quotient', x, y))
