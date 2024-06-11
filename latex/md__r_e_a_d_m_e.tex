@@ -1,0 +1,15 @@
+\chapter{README}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{README@{README}}
+Sure, here is an instruction for implementing Shamir\textquotesingle{}s Secret Sharing scheme\+:
+
+
+\begin{DoxyEnumerate}
+\item Choose a prime number ( p ) that is greater than the maximum value of the secret key.
+\item Choose a threshold number ( k ) which specifies the minimum number of shares required to reconstruct the secret.
+\item Generate a random polynomial of degree ( k-\/1 ) such that the constant term is the secret key. The remaining coefficients are randomly chosen from ( \textbackslash{}mathbb\{Z\}\+\_\+p ).
+\item Compute ( k ) points on the polynomial by evaluating it at ( k ) distinct x-\/coordinates.
+\item Distribute these points (shares) among the participants.
+\item To reconstruct the secret, combine at least ( k ) shares using Lagrange interpolation to obtain the polynomial and then evaluate it at ( x = 0 ) to find the secret key.
+\end{DoxyEnumerate}
+
+This is a high-\/level overview of how Shamir\textquotesingle{}s Secret Sharing works. Let me know if you need more detailed explanations or examples! 

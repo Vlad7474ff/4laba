@@ -1,61 +1,63 @@
-from demo import Calculator
-
-
-class Summation:
+class Сумма:  # Класс для вычисления суммы
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def compute(self):
+    def вычислить(self):  # Метод для выполнения вычислений
         return self.x + self.y
 
-class Difference:
+
+class Разность:  # Класс для вычисления разности
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def compute(self):
+    def вычислить(self):  # Метод для выполнения вычислений
         return self.x - self.y
 
-class Product:
+
+class Произведение:  # Класс для вычисления произведения
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def compute(self):
+    def вычислить(self):  # Метод для выполнения вычислений
         return self.x * self.y
 
-class Quotient:
+
+class Частное:  # Класс для вычисления частного
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def compute(self):
+    def вычислить(self):  # Метод для выполнения вычислений
         if self.y == 0:
-            raise ValueError("Cannot divide by zero")
+            raise ValueError("Нельзя делить на ноль")
         return self.x / self.y
 
-class Calculator:
+
+class Калькулятор:  # Класс калькулятора
     def __init__(self):
         pass
 
-    def execute_operation(self, operation, x, y):
-        if operation == 'summation':
-            return Summation(x, y).compute()
-        elif operation == 'difference':
-            return Difference(x, y).compute()
-        elif operation == 'product':
-            return Product(x, y).compute()
-        elif operation == 'quotient':
-            return Quotient(x, y).compute()
+    def выполнить_операцию(self, операция, x, y):  # Метод для выполнения операции
+        if операция == 'сумма':
+            return Сумма(x, y).вычислить()
+        elif операция == 'разность':
+            return Разность(x, y).вычислить()
+        elif операция == 'произведение':
+            return Произведение(x, y).вычислить()
+        elif операция == 'частное':
+            return Частное(x, y).вычислить()
         else:
-            raise ValueError("Invalid operation")
+            raise ValueError("Недопустимая операция")
+
 
 if __name__ == "__main__":
-    calc = Calculator()
+    калькулятор = Калькулятор()  # Создание экземпляра класса Калькулятор
     x = 50
     y = 2
-    print("Summation:", calc.execute_operation('summation', x, y))
-    print("Difference:", calc.execute_operation('difference', x, y))
-    print("Product:", calc.execute_operation('product', x, y))
-    print("Quotient:", calc.execute_operation('quotient', x, y))
+    print("Сумма:", калькулятор.выполнить_операцию('сумма', x, y))
+    print("Разность:", калькулятор.выполнить_операцию('разность', x, y))
+    print("Произведение:", калькулятор.выполнить_операцию('произведение', x, y))
+    print("Частное:", калькулятор.выполнить_операцию('частное', x, y))
